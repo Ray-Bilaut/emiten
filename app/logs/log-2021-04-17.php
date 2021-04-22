@@ -24,3 +24,7 @@ ERROR - 2021-04-17 01:37:45 --> Severity: Notice --> Undefined offset: 4 E:\xamp
 ERROR - 2021-04-17 01:37:45 --> Severity: Notice --> Trying to get property 'title' of non-object E:\xampp\htdocs\new_emiten\app\views\frontend\home_index.php 140
 ERROR - 2021-04-17 01:37:45 --> Severity: Notice --> Undefined offset: 4 E:\xampp\htdocs\new_emiten\app\views\frontend\home_index.php 141
 ERROR - 2021-04-17 01:37:45 --> Severity: Notice --> Trying to get property 'pretty_time' of non-object E:\xampp\htdocs\new_emiten\app\views\frontend\home_index.php 141
+ERROR - 2021-04-17 02:19:17 --> Severity: Notice --> Undefined variable: subscribe_bottom E:\xampp\htdocs\new_emiten\app\views\frontend\master.php 252
+ERROR - 2021-04-17 02:20:08 --> Severity: Notice --> Undefined variable: subscribe_bottom E:\xampp\htdocs\new_emiten\app\views\frontend\master.php 252
+ERROR - 2021-04-17 02:20:39 --> Severity: Notice --> Undefined variable: subscribe_bottom E:\xampp\htdocs\new_emiten\app\views\frontend\master.php 252
+ERROR - 2021-04-17 02:20:40 --> Severity: Notice --> Undefined variable: subscribe_bottom E:\xampp\htdocs\new_emiten\app\views\frontend\master.php 252

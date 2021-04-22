@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-require_once APPPATH.'core/APP_Frontend.php';
+require_once APPPATH . 'core/APP_Frontend.php';
 class Forgot extends APP_Frontend
 {
 
@@ -17,8 +17,8 @@ class Forgot extends APP_Frontend
             analyticLog('forgot_password_open', attr);
         });
         ";
-        $this->_addScript($js,'embed');
-
+        $this->_addScript($js, 'embed');
+        $this->_data['subscribe_bottom'] = $this->_addTemplate(null, 'subscribe_bottom');
         $this->_addContent($this->_data);
         $this->_render();
     }
@@ -28,7 +28,7 @@ class Forgot extends APP_Frontend
         $email = trim($this->input->post('email'));
 
         $user = $this->db->get_where('user', ['email' => $email])->row();
-		if (!empty($user)) {
+        if (!empty($user)) {
 
             $now = date('Y-m-d H:i:s');
 
@@ -37,11 +37,11 @@ class Forgot extends APP_Frontend
                 'is_active' => 1,
                 'created_date' => $now
             ];
-            
+
             $code = hash('sha256', $user->email . $data['user_id'] . $data['created_date']);
             $data['code'] = $code;
 
-            $forgot_token = $this->db->get_where('forgot_token', ['user_id' => $user->id, 'is_active'=>1])->row();
+            $forgot_token = $this->db->get_where('forgot_token', ['user_id' => $user->id, 'is_active' => 1])->row();
 
             if (empty($forgot_token)) {
                 if ($this->db->insert('forgot_token', $data)) {
@@ -57,12 +57,12 @@ class Forgot extends APP_Frontend
                 $expired = date('Y-m-d H:i:s', $expired);
 
                 if ($now < $expired) {
-                    
+
                     // send email here (expired in i day)
                     echo json_encode(['code' => 200]);
                     exit();
                 } else {
-                    $this->db->update('forgot_token',['is_active'=>0],['id'=>$forgot_token->id]);
+                    $this->db->update('forgot_token', ['is_active' => 0], ['id' => $forgot_token->id]);
                     if ($this->db->insert('forgot_token', $data)) {
                         // send email here (expired in i day)
                         echo json_encode(['code' => 200]);
@@ -73,13 +73,14 @@ class Forgot extends APP_Frontend
                     }
                 }
             }
-		} else {
+        } else {
             echo json_encode(['code' => 400]);
             exit();
         }
     }
 
-    public function reset($code='') {
+    public function reset($code = '')
+    {
         $forgot = $this->db->get_where('forgot_token', ['code' => $code, 'is_active' => 1])->row();
 
         if (empty($forgot) || $forgot == '') {
@@ -97,14 +98,15 @@ class Forgot extends APP_Frontend
                 $this->_addContent($this->_data);
                 $this->_render();
             } else {
-                $this->db->update('forgot_token',['is_active'=>0],['id'=>$forgot->id]);
+                $this->db->update('forgot_token', ['is_active' => 0], ['id' => $forgot->id]);
                 redirect('404');
             }
         }
     }
 
-    public function editprocess($code='') {
-        $this->load->library('form_validation'); 
+    public function editprocess($code = '')
+    {
+        $this->load->library('form_validation');
         $this->form_validation->set_message('required', '{field} can\'t be empty');
         $this->form_validation->set_rules('password', 'Password', 'required');
         $this->form_validation->set_rules('confirmpassword', 'Confirm Password', 'required|matches[password]');
@@ -116,10 +118,10 @@ class Forgot extends APP_Frontend
 
         $user = $this->db->query('
             SELECT u.id, ft.id as forgot_id
-            FROM '.$this->db->dbprefix('user').' u
-            LEFT JOIN '.$this->db->dbprefix('forgot_token').' ft
+            FROM ' . $this->db->dbprefix('user') . ' u
+            LEFT JOIN ' . $this->db->dbprefix('forgot_token') . ' ft
             ON u.id=ft.user_id
-            WHERE ft.code = "'.$code.'"')->row();
+            WHERE ft.code = "' . $code . '"')->row();
 
         if (empty($user)) {
             echo json_encode(['code' => 400, 'message' => 'User not found']);
@@ -130,8 +132,8 @@ class Forgot extends APP_Frontend
             'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
         ];
 
-        if ($this->db->update('user',$data,['id'=>$user->id])) {
-            $this->db->update('forgot_token',['is_active'=>0],['id'=>$user->forgot_id]);
+        if ($this->db->update('user', $data, ['id' => $user->id])) {
+            $this->db->update('forgot_token', ['is_active' => 0], ['id' => $user->forgot_id]);
             echo json_encode(['code' => 200]);
             exit();
         } else {

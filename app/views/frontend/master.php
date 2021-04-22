@@ -56,7 +56,7 @@
 
 </head>
 
-<body>
+<body class="dual-theme">
 
   <header>
 
@@ -93,11 +93,12 @@
         <li class="<?php if ($this->uri->segment(1) == "tag/emiten-academy") {
                       echo "active";
                     } ?> disabled item-menu-top"><a class="analytic-listener" data-label="emiten_academy_tap" data-attr="{'user_name' : '<?php echo empty($user->name) ? '' : $user->name ?>'}" href="<?php echo base_url('tag/emiten-academy') ?>">Emiten Academy</a><span>Soon</span></li>
-        <div class="logo only-desktop">
+        <div class="logo only-desktop dual-theme">
           <a class="analytic-listener" data-label="emitennews_logo_tap" data-attr="{'user_name' : '<?php echo empty($user->name) ? '' : $user->name ?>'}" href="<?php echo site_url('') ?>">
             <img src="<?php echo base_url('assets/images/logo.png') ?>" alt="emitennews-logo">
           </a>
         </div>
+
         <li class="<?php if ($this->uri->segment(1) == "expert") {
                       echo "active";
                     } ?> item-menu-top"><a class="analytic-listener" data-label="expert_views_tap" data-attr="{'user_name' : '<?php echo empty($user->name) ? '' : $user->name ?>'}" href="<?php echo site_url('expert') ?>">Expert Views</a></li>
@@ -187,6 +188,7 @@
           <!-- <div class="image-partner">
               <img src="<?php echo base_url('assets/images/dewan-pers.png') ?>" alt="dewan-pers">
             </div> -->
+
           <div class="image-partner">
             <a class="analytic-listener" data-label="idx_tap" data-attr="{'user_name' : '<?php echo empty($user->name) ? '' : $user->name ?>'}" href="https://idx.co.id/" target="_BLANK">
               <img src="<?php echo base_url('assets/images/bursa-efek.png') ?>" alt="bursa-efek">

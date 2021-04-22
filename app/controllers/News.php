@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-require_once APPPATH.'core/APP_Frontend.php';
+require_once APPPATH . 'core/APP_Frontend.php';
 class News extends APP_Frontend
 {
 
@@ -10,21 +10,22 @@ class News extends APP_Frontend
         $this->load->library("pagination");
     }
 
-    public function index($slug = '') {
+    public function index($slug = '')
+    {
 
         $news = $this->news->getDetailBySlug($slug);
 
-		if($news == FALSE) {
-			redirect('/404');
-    		exit;
+        if ($news == FALSE) {
+            redirect('/404');
+            exit;
         }
-        
+
         $config = array();
         $config["base_url"] = base_url() . "news/" . $slug;
         $config["total_rows"] = $news->paragraph_count;
         $config["per_page"] = $news->paragraph_per_page;
         $config["uri_segment"] = 3;
-        
+
         $this->pagination->initialize($config);
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
         $this->_data["links"] = $this->pagination->create_links();
@@ -37,6 +38,7 @@ class News extends APP_Frontend
         $this->_data['bottomAds'] = $this->ads->getNewsDetailBottomAds();
         $this->_data['likes'] = $this->news->getLikesCount($slug);
         $this->_data['comments'] = $this->news->getCommentBySlug($slug);
+        $this->_data['subscribe_bottom'] = $this->_addTemplate(null, 'subscribe_bottom');
         $tagsString = $this->news->getTagsString($slug);
         $this->metatag_detail_page($news->title, $news->description, $tagsString, $news->thumb_url);
 
@@ -46,14 +48,13 @@ class News extends APP_Frontend
 
         $js = "
         var attr = {};
-        attr.news_title = '".$news->title."';
+        attr.news_title = '" . $news->title . "';
         $(document).ready(function() {
             analyticLog('news_detail_open', attr);
         });
         ";
-        $this->_addScript($js,'embed');
-		$this->_addContent($this->_data);
+        $this->_addScript($js, 'embed');
+        $this->_addContent($this->_data);
         $this->_render();
-	}
-
+    }
 }

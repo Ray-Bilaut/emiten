@@ -17,7 +17,9 @@ function setDarkMode(isDark) {
         if (isDark) {
             allElement[i].classList.add("dark-mode");
             localStorage.setItem("theme", "dark");
-        } else {
+           
+        } else 
+        {
             allElement[i].classList.remove("dark-mode");
             localStorage.setItem("theme", "light");
         }

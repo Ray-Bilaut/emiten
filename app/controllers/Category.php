@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-require_once APPPATH.'core/APP_Frontend.php';
+require_once APPPATH . 'core/APP_Frontend.php';
 class Category extends APP_Frontend
 {
 
@@ -14,10 +14,10 @@ class Category extends APP_Frontend
     public function index($slug = '')
     {
         $category = $this->category_model->getCategoryBySlug($slug);
-        
-        if($category == FALSE) {
-			redirect('/404');
-    		exit;
+
+        if ($category == FALSE) {
+            redirect('/404');
+            exit;
         }
 
         $config = array();
@@ -38,19 +38,19 @@ class Category extends APP_Frontend
         $this->_data['bottomAds'] = $this->ads->getNewsListBottomAds();
         $this->_data['latestPodcast'] = $this->podcast->getLatestPodcast();
         $this->_data['latestPodcastTags'] = $this->podcast->getLatestPodcastTag();
-
+        $this->_data['subscribe_bottom'] = $this->_addTemplate(null, 'subscribe_bottom');
         $data['recommendations'] = $this->news->getRecommendation();
         $this->_data['list_recommendation'] = $this->_addTemplate($data, 'list_recommendation_detail');
         $this->_data['mobile_list_recommendation'] = $this->_addTemplate($data, 'mobile_list_recommendation');
 
         $js = "
         var attr = {};
-        attr.category_title = '".$category->title."';
+        attr.category_title = '" . $category->title . "';
         $(document).ready(function() {
             analyticLog('category_open', attr);
         });
         ";
-        $this->_addScript($js,'embed');
+        $this->_addScript($js, 'embed');
         $this->_addContent($this->_data);
         $this->_render();
     }

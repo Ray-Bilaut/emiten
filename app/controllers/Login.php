@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-require_once APPPATH.'core/APP_Frontend.php';
+require_once APPPATH . 'core/APP_Frontend.php';
 class Login extends APP_Frontend
 {
 
@@ -18,7 +18,8 @@ class Login extends APP_Frontend
             analyticLog('login_open', attr);
         });
         ";
-        $this->_addScript($js,'embed');
+        $this->_addScript($js, 'embed');
+        $this->_data['subscribe_bottom'] = $this->_addTemplate(null, 'subscribe_bottom');
         $this->_addContent($this->_data);
         $this->_render();
     }
@@ -26,11 +27,11 @@ class Login extends APP_Frontend
     public function addprocess()
     {
         $email  = $this->input->post('email');
-		$password = $this->input->post('password');
+        $password = $this->input->post('password');
 
         $user = $this->db->get_where('user', ['email' => $email])->row_array();
-		if($user){
-			if(password_verify($password, $user['password'])){
+        if ($user) {
+            if (password_verify($password, $user['password'])) {
                 // send email here
                 $theUser = new \stdClass();
                 $theUser->email = $user['email'];
@@ -39,11 +40,11 @@ class Login extends APP_Frontend
                 $this->_set_session($theUser);
                 echo json_encode(['code' => 200]);
                 exit();
-			} else {
+            } else {
                 echo json_encode(['code' => 400]);
                 exit();
-			}
-		}
+            }
+        }
     }
 
     public function logout()
