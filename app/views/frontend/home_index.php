@@ -76,41 +76,17 @@
 </div>
 
 <div class="container-fluid">
-    <div class="row-flex column-mobile">
-        <div class="adsanse-image">
-            <!-- ADS READY 280 x 250 -->
-            <?php if (!empty($homeAds)) : ?>
-                <a class="analytic-listener" data-label="ads_tap" data-attr="{'ads_title': '<?php echo $homeAds->title ?>', 'user_name' : '<?php echo empty($user->name) ? '' : $user->name ?>'}" href="<?php echo $homeAds->url ?>" target="_BLANK">
-                    <img src="<?php echo $homeAds->image_url ?>" alt="<?php echo $homeAds->title ?>">
-                </a>
-            <?php endif; ?>
-        </div>
-        <?php if (count($podcastHome) > 0) : ?>
-            <div class="podcast-home dual-theme">
-                <?php foreach ($podcastHome as $podcast) : ?>
-                    <div class="item-podcast">
-                        <a class="analytic-listener" data-label="home_podcast_tap" data-attr="{'podcast_title': '<?php echo $podcast->title ?>', 'user_name' : '<?php echo empty($user->name) ? '' : $user->name ?>'}" href="<?php echo $podcast->detail_url ?>">
-                            <h1><?php echo character_limiter(strip_tags($podcast->title), 50) ?></h1>
-                        </a>
-                        <p>
-                            <?php foreach ($podcastTagHome as $tag) {
-                                if ($tag->podcast_id == $podcast->id) { ?>
-                                    <a class="analytic-listener" data-label="tag_tap" data-attr="{'tag_title': '<?php echo $tag->tag_title ?>', 'user_name' : '<?php echo empty($user->name) ? '' : $user->name ?>'}" href="<?php echo base_url('tag/' . $tag->tag_url) ?>"> #<?php echo $tag->tag_title ?> </a>
-                            <?php }
-                            } ?>
-                        </p>
-                        <div class="bottom-podcast">
-                            <a class="analytic-listener" data-label="home_podcast_tap" data-attr="{'podcast_title': '<?php echo $podcast->title ?>', 'user_name' : '<?php echo empty($user->name) ? '' : $user->name ?>'}" href="<?php echo $podcast->detail_url ?>">
-                                <div class="play-area"><i class="fa fa-play"></i></div>
-                            </a>
-                            <div class="detail-area"><i class="fa <?php echo $podcast->type == 0 ? 'fa-microphone' : 'fa-video' ?>"></i></div>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        <?php endif; ?>
-    </div>
 
+    <div class="ads-wrap">
+        <div class="ads-1">
+            <img src="<?php echo $homeAds->image_url ?>" alt="<?php echo $homeAds->title ?>">
+        </div>
+        <div class="ads-2"> <img src="<?php echo $homeAds->image_url ?>" alt="<?php echo $homeAds->title ?>"></div>
+        <div class="ads-3"> <img src="<?php echo $homeAds->image_url ?>" alt="<?php echo $homeAds->title ?>"></div>
+
+        <!-- ADS READY 990 x 240  -->
+
+    </div>
     <div class="row-flex">
         <div class="section-news-home">
             <div class="container-category">
@@ -261,11 +237,9 @@
             <div class="box-kurs-up dual-theme">
                 <div class="menu-kurs-up">
                     <ul class="nav nav-pills" id="pills-tab" role="tablist">
+
                         <li class="nav-item">
-                            <a class="nav-link dual-theme active analytic-listener" id="pills-trending-tab" data-toggle="pill" data-label="home_stock_tap" data-attr="{'stock_type': 'top_change', 'user_name' : '<?php echo empty($user->name) ? '' : $user->name ?>'}" href="#pills-trending" role="tab" aria-controls="pills-trending" aria-selected="true">Stock</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link dual-theme analytic-listener" id="pills-most-tab" data-toggle="pill" data-label="home_stock_tap" data-attr="{'stock_type': 'top_value', 'user_name' : '<?php echo empty($user->name) ? '' : $user->name ?>'}" href="#pills-most" role="tab" aria-controls="pills-most" aria-selected="false">Top Value</a>
+                            <a class="nav-link dual-theme active analytic-listener" id="pills-most-tab" data-toggle="pill" data-label="home_stock_tap" data-attr="{'stock_type': 'top_value', 'user_name' : '<?php echo empty($user->name) ? '' : $user->name ?>'}" href="#pills-most" role="tab" aria-controls="pills-most" aria-selected="false">Top Value</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link dual-theme analytic-listener" id="pills-top-tab" data-toggle="pill" data-label="home_stock_tap" data-attr="{'stock_type': 'top_volume', 'user_name' : '<?php echo empty($user->name) ? '' : $user->name ?>'}" href="#pills-top" role="tab" aria-controls="pills-top" aria-selected="false">Top Volume</a>
@@ -277,17 +251,19 @@
                 </div>
                 <div class="content-kurs-up">
                     <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="pills-trending" role="tabpanel" aria-labelledby="pills-trending-tab">
-                            <?php for ($i = 0; $i < count($topChange); $i++) : ?>
+
+                        <div class="tab-pane fade show active" id="pills-most" role="tabpanel" aria-labelledby="pills-most-tab">
+                            <?php for ($i = 0; $i < count($topValue); $i++) : ?>
                                 <div class="item-kurs dual-theme">
                                     <div class="name-corporate">
-                                        <h1><?php echo $topChange[$i]->code ?></h1>
-                                        <h2><?php echo $topChange[$i]->name ?></h2>
+                                        <h1><?php echo $topValue[$i]->code ?></h1>
+                                        <h2><?php echo $topValue[$i]->name ?></h2>
                                     </div>
-                                    <p class="<?php echo $topChange[$i]->colorstatus ?>"><?php echo $topChange[$i]->change . ' (' . $topChange[$i]->change_percent_formatted . ')%' ?></p>
+                                    <p class="<?php echo $topValue[$i]->colorstatus ?>"><?php echo $topValue[$i]->change . ' (' . $topValue[$i]->change_percent_formatted . '%)' ?></p>
                                 </div>
                             <?php endfor; ?>
                         </div>
+
                         <div class="tab-pane fade" id="pills-top" role="tabpanel" aria-labelledby="pills-top-tab">
                             <?php for ($i = 0; $i < count($topVolume); $i++) : ?>
                                 <div class="item-kurs dual-theme">
@@ -295,21 +271,11 @@
                                         <h1><?php echo $topVolume[$i]->code ?></h1>
                                         <h2><?php echo $topVolume[$i]->name ?></h2>
                                     </div>
-                                    <p class="<?php echo $topVolume[$i]->colorstatus ?>"><?php echo $topVolume[$i]->change . ' (' . $topVolume[$i]->change_percent_formatted . ')%' ?></p>
+                                    <p class="<?php echo $topVolume[$i]->colorstatus ?>"><?php echo $topVolume[$i]->change . ' (' . $topVolume[$i]->change_percent_formatted . '%)' ?></p>
                                 </div>
                             <?php endfor; ?>
                         </div>
-                        <div class="tab-pane fade" id="pills-most" role="tabpanel" aria-labelledby="pills-most-tab">
-                            <?php for ($i = 0; $i < count($topValue); $i++) : ?>
-                                <div class="item-kurs dual-theme">
-                                    <div class="name-corporate">
-                                        <h1><?php echo $topValue[$i]->code ?></h1>
-                                        <h2><?php echo $topValue[$i]->name ?></h2>
-                                    </div>
-                                    <p class="<?php echo $topValue[$i]->colorstatus ?>"><?php echo $topValue[$i]->change . ' (' . $topValue[$i]->change_percent_formatted . ')%' ?></p>
-                                </div>
-                            <?php endfor; ?>
-                        </div>
+
                         <div class="tab-pane fade" id="pills-gainer" role="tabpanel" aria-labelledby="pills-gainer-tab">
                             <?php for ($i = 0; $i < count($topFrequency); $i++) : ?>
                                 <div class="item-kurs dual-theme">
@@ -317,7 +283,7 @@
                                         <h1><?php echo $topFrequency[$i]->code ?></h1>
                                         <h2><?php echo $topFrequency[$i]->name ?></h2>
                                     </div>
-                                    <p class="<?php echo $topFrequency[$i]->colorstatus ?>"><?php echo $topFrequency[$i]->change . ' (' . $topFrequency[$i]->change_percent_formatted . ')%' ?></p>
+                                    <p class="<?php echo $topFrequency[$i]->colorstatus ?>"><?php echo $topFrequency[$i]->change . ' (' . $topFrequency[$i]->change_percent_formatted . '%)' ?></p>
                                 </div>
                             <?php endfor; ?>
                         </div>
@@ -471,9 +437,42 @@
 
     <?php echo $mobile_list_recommendation ?>
 
-    <div class="ads-wrap">
-        <p>ADS READY 990 x 240</p>
-        <!-- ADS READY 990 x 240  -->
-
+    <div class="row-flex column-mobile">
+        <div class="adsanse-image">
+            <!-- ADS READY 280 x 250 -->
+            <?php if (!empty($homeAds)) : ?>
+                <a class="analytic-listener" data-label="ads_tap" data-attr="{'ads_title': '<?php echo $homeAds->title ?>', 'user_name' : '<?php echo empty($user->name) ? '' : $user->name ?>'}" href="<?php echo $homeAds->url ?>" target="_BLANK">
+                    <img src="<?php echo $homeAds->image_url ?>" alt="<?php echo $homeAds->title ?>">
+                </a>
+            <?php endif; ?>
+        </div>
+        <?php if (count($podcastHome) > 0) : ?>
+            <div class="podcast-home dual-theme">
+                <?php foreach ($podcastHome as $podcast) : ?>
+                    <div class="item-podcast">
+                        <a class="analytic-listener" data-label="home_podcast_tap" data-attr="{'podcast_title': '<?php echo $podcast->title ?>', 'user_name' : '<?php echo empty($user->name) ? '' : $user->name ?>'}" href="<?php echo $podcast->detail_url ?>">
+                            <h1><?php echo character_limiter(strip_tags($podcast->title), 50) ?></h1>
+                        </a>
+                        <p>
+                            <?php foreach ($podcastTagHome as $tag) {
+                                if ($tag->podcast_id == $podcast->id) { ?>
+                                    <a class="analytic-listener" data-label="tag_tap" data-attr="{'tag_title': '<?php echo $tag->tag_title ?>', 'user_name' : '<?php echo empty($user->name) ? '' : $user->name ?>'}" href="<?php echo base_url('tag/' . $tag->tag_url) ?>"> #<?php echo $tag->tag_title ?> </a>
+                            <?php }
+                            } ?>
+                        </p>
+                        <div class="bottom-podcast">
+                            <a class="analytic-listener" data-label="home_podcast_tap" data-attr="{'podcast_title': '<?php echo $podcast->title ?>', 'user_name' : '<?php echo empty($user->name) ? '' : $user->name ?>'}" href="<?php echo $podcast->detail_url ?>">
+                                <div class="play-area"><i class="fa fa-play"></i></div>
+                            </a>
+                            <div class="detail-area"><i class="fa <?php echo $podcast->type == 0 ? 'fa-microphone' : 'fa-video' ?>"></i></div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
     </div>
+
+
+
+
 </div>

@@ -93,9 +93,15 @@
         <li class="<?php if ($this->uri->segment(1) == "tag/emiten-academy") {
                       echo "active";
                     } ?> disabled item-menu-top"><a class="analytic-listener" data-label="emiten_academy_tap" data-attr="{'user_name' : '<?php echo empty($user->name) ? '' : $user->name ?>'}" href="<?php echo base_url('tag/emiten-academy') ?>">Emiten Academy</a><span>Soon</span></li>
-        <div class="logo only-desktop dual-theme">
+        <div class="logo-white only-desktop dual-theme">
           <a class="analytic-listener" data-label="emitennews_logo_tap" data-attr="{'user_name' : '<?php echo empty($user->name) ? '' : $user->name ?>'}" href="<?php echo site_url('') ?>">
-            <img src="<?php echo base_url('assets/images/logo.png') ?>" alt="emitennews-logo">
+            <img src="<?php echo base_url('assets/images/logo.png') ?>" alt="emitennews-logo" id="logo">
+          </a>
+        </div>
+
+        <div class="logo-dark only-desktop dual-theme">
+          <a class="analytic-listener" data-label="emitennews_logo_tap" data-attr="{'user_name' : '<?php echo empty($user->name) ? '' : $user->name ?>'}" href="<?php echo site_url('') ?>">
+            <img src="<?php echo base_url('assets/images/logo-white.png') ?>" alt="emitennews-logo" id="logo">
           </a>
         </div>
 
@@ -163,13 +169,10 @@
 
   <footer class="dual-theme">
     <div class="container-footer">
-
       <!-- PARTNER -->
       <div class="logo-footer">
         <img src="<?php echo base_url('assets/images/logo.png') ?>" alt="emitennews-logo">
-
         <div class="logo-partner">
-          <small><strong>Partner kami :</strong></small>
           <div class="image-partner">
             <a class="analytic-listener" data-label="kemenkeu_tap" data-attr="{'user_name' : '<?php echo empty($user->name) ? '' : $user->name ?>'}" href="https://www.kemenkeu.go.id/" target="_BLANK">
               <img src="<?php echo base_url('assets/images/kementrian-keuangan.png') ?>" alt="kementrian-keuangan">
@@ -185,10 +188,9 @@
               <img src="<?php echo base_url('assets/images/ojk.png') ?>" alt="ojk">
             </a>
           </div>
-          <!-- <div class="image-partner">
-              <img src="<?php echo base_url('assets/images/dewan-pers.png') ?>" alt="dewan-pers">
-            </div> -->
+        </div>
 
+        <div class="logo-partner">
           <div class="image-partner">
             <a class="analytic-listener" data-label="idx_tap" data-attr="{'user_name' : '<?php echo empty($user->name) ? '' : $user->name ?>'}" href="https://idx.co.id/" target="_BLANK">
               <img src="<?php echo base_url('assets/images/bursa-efek.png') ?>" alt="bursa-efek">
@@ -196,12 +198,12 @@
           </div>
           <div class="image-partner">
             <a class="analytic-listener" data-label="kpei_tap" data-attr="{'user_name' : '<?php echo empty($user->name) ? '' : $user->name ?>'}" href="https://www.kpei.co.id/" target="_BLANK">
-              <img src="<?php echo base_url('assets/images/kpei_new.png') ?>" alt="kpei">
+              <img src="<?php echo base_url('assets/images/kpei_test.png') ?>" alt="kpei">
             </a>
           </div>
           <div class="image-partner">
             <a class="analytic-listener" data-label="ksei_tap" data-attr="{'user_name' : '<?php echo empty($user->name) ? '' : $user->name ?>'}" href="https://www.ksei.co.id/" target="_BLANK">
-              <img src="<?php echo base_url('assets/images/ksei-1.png') ?>" alt="ksei">
+              <img src="<?php echo base_url('assets/images/ksei.png') ?>" alt="ksei">
             </a>
           </div>
         </div>

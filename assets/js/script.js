@@ -2,8 +2,10 @@ const currentTheme = localStorage.getItem("theme");
 
 if (currentTheme == "dark") {
   var allElement = document.getElementsByClassName("dual-theme");
+  var body = document.body("dual-theme");
     for(var i=0; i<allElement.length; i++) {
         allElement[i].classList.add("dark-mode");
+        body.classList.add("dark-mode");
     }
 
   document.getElementById("btn-dark").classList.add("active");
@@ -13,6 +15,8 @@ if (currentTheme == "dark") {
 
 function setDarkMode(isDark) {
     var allElement = document.getElementsByClassName("dual-theme");
+   
+   
     for(var i=0; i<allElement.length; i++) {
         if (isDark) {
             allElement[i].classList.add("dark-mode");
